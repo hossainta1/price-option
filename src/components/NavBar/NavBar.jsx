@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Link from "../Link/Link";
-import { FaBars } from "react-icons/fa";
-
+import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 const NavBar = () => {
   const [open, setOpen] = useState(false);
   const routes = [
@@ -13,14 +12,20 @@ const NavBar = () => {
   ];
 
   return (
-    <nav>
-      <div className="md:hidden" onClick={() => setOpen(true)}>
-        {
-            open === true ? 'Open' : 'close'
-        }
-        <FaBars className="text-2xl"></FaBars>
+    <nav className="text-black p-6 bg-yellow-400">
+      <div className="md:hidden text-2xl" onClick={() => setOpen(!open)}>
+        {open === true ? (
+          <AiOutlineClose></AiOutlineClose>
+        ) : (
+          <AiOutlineMenu></AiOutlineMenu>
+        )}
       </div>
-      <ul className="md:flex">
+      <ul
+        className={`md:flex duration-1000 
+          absolute md:static
+        ${open ? 'top-16' : '-top-60'}
+       bg-yellow-400 px-6`}
+      >
         {routes.map((route) => (
           <Link key={route.id} route={route}></Link>
         ))}
